@@ -1,0 +1,9 @@
+﻿<Application x:Class="Bewegung_mit_den_Pfeiltasten.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Bewegung_mit_den_Pfeiltasten"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
