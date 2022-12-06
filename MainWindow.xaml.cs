@@ -46,28 +46,20 @@ namespace Bewegung_mit_den_Pfeiltasten
             if (e.Key == Key.Up)
             {
                 //dieser Code wird ausgeführt, wenn Pfeiltaste hoch gedrückt wird
-                if (x < x1-50 || x > x1 + 10)
+                
+                
+                if (y <= canvas_Bewegung.ActualHeight - uwu.ActualHeight - 10 && !Collision.Left(uwu, Wand))
                 {
-                    if (y <= canvas_Bewegung.ActualHeight - uwu.ActualHeight - 10)
-                    {
-                        y += 10;
-                        Canvas.SetBottom(uwu, y);
-                    }
+                    y += 10;
+                    Canvas.SetBottom(uwu, y);
                 }
-                else if (y < y1 - 60 || y > y1 + 200)
-                {
-                    if (y <= canvas_Bewegung.ActualHeight - uwu.ActualHeight - 10)
-                    {
-                        y += 10;
-                        Canvas.SetBottom(uwu, y);
-                    }
-                }
+                
                 
                 
             }
             else if(e.Key == Key.Down)
             {
-                if (y >= 10)
+                if (y >= 10 && !Collision.Left(uwu, Wand))
                 {
                     y -= 10;
                     Canvas.SetBottom(uwu, y);
@@ -76,7 +68,7 @@ namespace Bewegung_mit_den_Pfeiltasten
             }
             else if (e.Key == Key.Left)
             {
-                if (x >= 10)
+                if (x >= 10 && !Collision.Left(uwu, Wand))
                 {
                     x -= 10;
                     Canvas.SetLeft(uwu, x);
@@ -85,7 +77,7 @@ namespace Bewegung_mit_den_Pfeiltasten
             }
             else if (e.Key== Key.Right)
             {
-                if (x <= canvas_Bewegung.ActualWidth - uwu.ActualWidth - 10)
+                if (x <= canvas_Bewegung.ActualWidth - uwu.ActualWidth - 10 && !Collision.Left(uwu,Wand))
                 {
                     x += 10;
                     Canvas.SetLeft(uwu, x);
@@ -104,6 +96,36 @@ namespace Bewegung_mit_den_Pfeiltasten
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
 
+        }
+
+    }
+    class Collision
+    {
+        public static bool Left(Shape moving, Shape fest)
+        {
+            // Diese Methode erkennt, ob das Objekt moving
+            // von der linken Seite mit fest kollidiert.
+            // Eckpunkt des bewegten Objekts:
+            double x = Canvas.GetLeft(moving)+5;
+            double y = Canvas.GetBottom(moving);
+            double xw = x + moving.ActualWidth;
+            double yh = y + moving.ActualHeight;
+
+            //Eckpunkt des festen Objekts:
+            double xfest = Canvas.GetLeft(fest);
+            double yfest = Canvas.GetBottom(fest);
+            double xwfest = xfest + fest.ActualWidth;
+            double yhfest = yfest + fest.ActualHeight;
+
+            if(xw > xfest && yh > yfest && y < yhfest && x < xwfest)
+            {
+                return true;
+            }
+            else {return false;}
+
+            // Wenn beide Figuren kollidieren (aufeinander treffen)
+            // wird true zurückgegeben, sonst false.
+            
         }
     }
 }
