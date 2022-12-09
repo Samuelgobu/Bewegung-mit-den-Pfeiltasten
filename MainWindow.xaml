@@ -8,10 +8,8 @@
         Title="MainWindow" Height="450" Width="806" Name="window1" PreviewKeyDown="Window_PreviewKeyDown" FocusManager.FocusedElement="{Binding ElementName=canvas_Bewegung}">
     <Canvas x:Name="canvas_Bewegung" KeyDown="Canvas_Bewegung_KeyDown" Focusable="true" >
         <Ellipse x:Name="uwu" Height="50" Fill="DarkSeaGreen" Canvas.Left="10" Stroke="Black" 
-                 Canvas.Bottom="10" Width="50" Canvas.Top="358"/>
-        <Rectangle x:Name="Wand" Stroke="Black" Fill="Gray" Width="10" Height="200" Canvas.Left="260" Canvas.Bottom="50" Canvas.Top="105">
-
-        </Rectangle>
+                 Canvas.Bottom="10" Width="50"/>
+        <Rectangle x:Name="Wand" Stroke="Black" Fill="Gray" Width="10" Height="200" Canvas.Bottom="100" Canvas.Left="360" />
 
     </Canvas>
 

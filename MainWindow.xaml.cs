@@ -48,7 +48,7 @@ namespace Bewegung_mit_den_Pfeiltasten
                 //dieser Code wird ausgeführt, wenn Pfeiltaste hoch gedrückt wird
                 
                 
-                if (y <= canvas_Bewegung.ActualHeight - uwu.ActualHeight - 10 && !Collision.Left(uwu, Wand))
+                if (y <= canvas_Bewegung.ActualHeight - uwu.ActualHeight - 10 && !Collision.Up(uwu, Wand))
                 {
                     y += 10;
                     Canvas.SetBottom(uwu, y);
@@ -59,7 +59,7 @@ namespace Bewegung_mit_den_Pfeiltasten
             }
             else if(e.Key == Key.Down)
             {
-                if (y >= 10 && !Collision.Left(uwu, Wand))
+                if (y >= 10 && !Collision.Down(uwu, Wand))
                 {
                     y -= 10;
                     Canvas.SetBottom(uwu, y);
@@ -77,7 +77,7 @@ namespace Bewegung_mit_den_Pfeiltasten
             }
             else if (e.Key== Key.Right)
             {
-                if (x <= canvas_Bewegung.ActualWidth - uwu.ActualWidth - 10 && !Collision.Left(uwu,Wand))
+                if (x <= canvas_Bewegung.ActualWidth - uwu.ActualWidth - 10 && !Collision.Right(uwu,Wand))
                 {
                     x += 10;
                     Canvas.SetLeft(uwu, x);
@@ -103,21 +103,21 @@ namespace Bewegung_mit_den_Pfeiltasten
     {
         public static bool Left(Shape moving, Shape fest)
         {
-            // Diese Methode erkennt, ob das Objekt moving
-            // von der linken Seite mit fest kollidiert.
+            // Diese Methode erkennt, ob das Objekt moving mit dem
+            //Objekt fest kollidiert, wenn moving sich nach links bewegt.
             // Eckpunkt des bewegten Objekts:
-            double x = Canvas.GetLeft(moving)+5;
-            double y = Canvas.GetBottom(moving);
-            double xw = x + moving.ActualWidth;
-            double yh = y + moving.ActualHeight;
+            double x0 = Canvas.GetLeft(moving)-5;
+            double y0 = Canvas.GetBottom(moving);
+            double x1 = x0 + moving.ActualWidth;
+            double y1 = y0 + moving.ActualHeight;
 
             //Eckpunkt des festen Objekts:
-            double xfest = Canvas.GetLeft(fest);
-            double yfest = Canvas.GetBottom(fest);
-            double xwfest = xfest + fest.ActualWidth;
-            double yhfest = yfest + fest.ActualHeight;
+            double xf0 = Canvas.GetLeft(fest);
+            double yf0 = Canvas.GetBottom(fest);
+            double xf1 = xf0 + fest.ActualWidth;
+            double yf1 = yf0 + fest.ActualHeight;
 
-            if(xw > xfest && yh > yfest && y < yhfest && x < xwfest)
+            if(xf0 <= x1 && x0 <= xf1 && yf0 <= y1 && y0 <= yf1)
             {
                 return true;
             }
@@ -126,6 +126,88 @@ namespace Bewegung_mit_den_Pfeiltasten
             // Wenn beide Figuren kollidieren (aufeinander treffen)
             // wird true zurückgegeben, sonst false.
             
+        }
+
+
+        public static bool Right(Shape moving, Shape fest)
+        {
+            // Diese Methode erkennt, ob das Objekt moving mit dem
+            //Objekt fest kollidiert, wenn moving sich nach links bewegt.
+            // Eckpunkt des bewegten Objekts:
+            double x0 = Canvas.GetLeft(moving) + 5;
+            double y0 = Canvas.GetBottom(moving);
+            double x1 = x0 + moving.ActualWidth;
+            double y1 = y0 + moving.ActualHeight;
+
+            //Eckpunkt des festen Objekts:
+            double xf0 = Canvas.GetLeft(fest);
+            double yf0 = Canvas.GetBottom(fest);
+            double xf1 = xf0 + fest.ActualWidth;
+            double yf1 = yf0 + fest.ActualHeight;
+
+            if (xf0 <= x1 && x0 <= xf1 && yf0 <= y1 && y0 <= yf1)
+            {
+                return true;
+            }
+            else { return false; }
+
+            // Wenn beide Figuren kollidieren (aufeinander treffen)
+            // wird true zurückgegeben, sonst false.
+
+        }
+
+        public static bool Up(Shape moving, Shape fest)
+        {
+            // Diese Methode erkennt, ob das Objekt moving mit dem
+            //Objekt fest kollidiert, wenn moving sich nach links bewegt.
+            // Eckpunkt des bewegten Objekts:
+            double x0 = Canvas.GetLeft(moving);
+            double y0 = Canvas.GetBottom(moving) + 5;
+            double x1 = x0 + moving.ActualWidth;
+            double y1 = y0 + moving.ActualHeight;
+
+            //Eckpunkt des festen Objekts:
+            double xf0 = Canvas.GetLeft(fest);
+            double yf0 = Canvas.GetBottom(fest);
+            double xf1 = xf0 + fest.ActualWidth;
+            double yf1 = yf0 + fest.ActualHeight;
+
+            if (xf0 <= x1 && x0 <= xf1 && yf0 <= y1 && y0 <= yf1)
+            {
+                return true;
+            }
+            else { return false; }
+
+            // Wenn beide Figuren kollidieren (aufeinander treffen)
+            // wird true zurückgegeben, sonst false.
+
+        }
+
+        public static bool Down(Shape moving, Shape fest)
+        {
+            // Diese Methode erkennt, ob das Objekt moving mit dem
+            //Objekt fest kollidiert, wenn moving sich nach links bewegt.
+            // Eckpunkt des bewegten Objekts:
+            double x0 = Canvas.GetLeft(moving);
+            double y0 = Canvas.GetBottom(moving) - 5;
+            double x1 = x0 + moving.ActualWidth;
+            double y1 = y0 + moving.ActualHeight;
+
+            //Eckpunkt des festen Objekts:
+            double xf0 = Canvas.GetLeft(fest);
+            double yf0 = Canvas.GetBottom(fest);
+            double xf1 = xf0 + fest.ActualWidth;
+            double yf1 = yf0 + fest.ActualHeight;
+
+            if (xf0 <= x1 && x0 <= xf1 && yf0 <= y1 && y0 <= yf1)
+            {
+                return true;
+            }
+            else { return false; }
+
+            // Wenn beide Figuren kollidieren (aufeinander treffen)
+            // wird true zurückgegeben, sonst false.
+
         }
     }
 }
